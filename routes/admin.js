@@ -1,8 +1,10 @@
 var express = require('express');
+const { render } = require('../app');
 var router = express.Router();
 
-/* GET home page. */
+/* GET users listing. */
 router.get('/', function(req, res, next) {
+
   let products = [
     {
       name: 'IPHONE 11',
@@ -31,7 +33,16 @@ router.get('/', function(req, res, next) {
     
   ]
 
-  res.render('index', { title: 'ShoppingCart', products, admin:true });
+  res.render('Admin/view-products', {admin:true, products})
 });
+
+router.get('/add-product',(req, res, next) =>{
+  res.render('Admin/add-product', {admin:true})
+})
+
+router.post('/add-product',(req, res) => {
+  console.log(req.body)
+  console.log(req.files.Image)
+})
 
 module.exports = router;
